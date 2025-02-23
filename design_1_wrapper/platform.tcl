@@ -117,3 +117,15 @@ domain active {zynq_fsbl}
 platform config -updatehw {/home/user/work/2024/pcam/pcam_sw/from_hw/design_1_wrapper.xsa}
 platform config -updatehw {/home/user/work/2024/pcam/pcam_sw/from_hw/design_1_wrapper.xsa}
 platform config -updatehw {/home/user/work/2024/pcam/pcam_sw/from_hw/design_1_wrapper.xsa}
+platform clean
+platform clean
+platform clean
+platform generate
+platform clean
+platform generate
+platform clean
+platform clean
+platform generate
+platform clean
+platform clean
+platform generate

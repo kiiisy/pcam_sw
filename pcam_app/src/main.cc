@@ -43,8 +43,8 @@ void pipeline_mode_change(AXI_VDMA<ScuGicInterruptController> &vdma_driver,
     {
         vdma_driver.configureWrite(timing[static_cast<int>(res)].h_active,
                                    timing[static_cast<int>(res)].v_active);
-        Xil_Out32(GAMMA_BASE_ADDR, 3); // Set Gamma correction factor to 1/1.8
-        Xil_Out32(GRAYSCALE_BASE_ADDR, 1);
+        Xil_Out32(GAMMA_BASE_ADDR, 3);     // Set Gamma correction factor to 1/1.8
+        Xil_Out32(GRAYSCALE_BASE_ADDR, 0); // Set GrayScale mode to disabled
         // TODO CSI-2, D-PHY config here
         cam.init();
     }
@@ -118,7 +118,8 @@ int main()
         xil_printf("\r\n  e. Write a Register Inside the Image Sensor");
         xil_printf("\r\n  f. Read a Register Inside the Image Sensor");
         xil_printf("\r\n  g. Change Gamma Correction Factor Value");
-        xil_printf("\r\n  h. Change AWB Settings\r\n\r\n");
+        xil_printf("\r\n  h. Change AWB Settings");
+        xil_printf("\r\n  i. Change GrayScale Mode\r\n\r\n");
 
         read_char0 = getchar();
         getchar();
@@ -493,11 +494,35 @@ int main()
                     "Please retry...\r\n");
             }
             break;
+        case 'i':
+            xil_printf(
+                "  Please press the key corresponding to the desired GrayScale "
+                "change:\r\n");
+            xil_printf("    1. Enable GrayScale Mode\r\n");
+            xil_printf("    2. Disable GrayScale Mode\r\n");
+            read_char1 = getchar();
+            getchar();
+            xil_printf("Read: %d\r\n", read_char1);
+            switch (read_char1)
+            {
+            case '1':
+                Xil_Out32(GRAYSCALE_BASE_ADDR, 1);
+                xil_printf("Enabled GrayScale Mode\r\n");
+                break;
+            case '2':
+                Xil_Out32(GRAYSCALE_BASE_ADDR, 0);
+                xil_printf("Disabled GrayScale Mode\r\n");
+                break;
 
+            default:
+                xil_printf(
+                    "  Selection is outside the available options! Please "
+                    "retry...\r\n");
+            }
         default:
             xil_printf(
-                "  Selection is outside the available options! Please "
-                "retry...\r\n");
+                "\r\n  Selection is outside the available options! Please "
+                "retry...");
         }
 
         read_char1 = 0;
