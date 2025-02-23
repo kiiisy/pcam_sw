@@ -381,7 +381,14 @@
 #define XPAR_PS7_SLCR_0_S_AXI_HIGHADDR 0xF8000FFF
 
 
+/* Peripheral Definitions for peripheral GRAYSCALE_0 */
+#define XPAR_GRAYSCALE_0_S00_AXI_BASEADDR 0x43C50000
+#define XPAR_GRAYSCALE_0_S00_AXI_HIGHADDR 0x43C5FFFF
+
+
 /******************************************************************/
+
+
 
 
 
